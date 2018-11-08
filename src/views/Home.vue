@@ -26,7 +26,7 @@
               </tr>
               </thead>
               <tbody id="tbody_cars">
-              <car v-for="c in cars" :car="c" :key="c._id"></car>
+              <car v-for="c in cars" :car="c" :cars="cars" :key="c._id"></car>
               </tbody>
             </table>
           </div>
@@ -49,14 +49,11 @@ export default {
         return {
             test: "testas",
             cars: [],
-
         }
     },created(){
         fetch("http://localhost:5001/api/cars").then(response => response.json()).then(json=>{
-            console.log(json);
             this.cars = json;
         })
-    },
-
+    }
 }
 </script>

@@ -1,7 +1,7 @@
 <template>
     <tr>
         <td>
-            <img src="https://via.placeholder.com/250x125/d2d2d2/?text=no%20image%20yet" onerror="this.src='https://via.placeholder.com/250x125/d2d2d2/?text=no%20image%20yet';" :alt="this.car.brand+' '+this.car.brand" :title="this.car.brand+' '+this.car.brand" class="carImg" />
+            <img src="https://via.placeholder.com/250x125/d2d2d2/?text=no%20image%20yet" onerror="this.src='https://via.placeholder.com/250x125/d2d2d2/?text=no%20image%20yet';" :alt="this.car.brand+' '+this.car.model" :title="this.car.brand+' '+this.car.model" class="carImg" />
         </td>
 
         <td>{{car._id}}</td>
@@ -17,7 +17,7 @@
 
 <script>
     export default {
-        props:['car'],
+        props:['car', 'cars'],
         name: 'car',
         filters: {
             capitalize: function (value) {
@@ -29,7 +29,15 @@
         },
         methods: {
             removeCar(){
-                console.log(this.car._id);
+                fetch('http://localhost:5001/api/cars/' + this.car._id, {
+                    method: 'DELETE',
+                    headers: {'Content-Type': 'application/json'},
+                }).then(response => response.json()).then(json=>{
+                    if(json.status === 'ok'){
+                        let targetCar = this.cars.find(x => x._id === this.car._id);
+                        this.cars.splice(this.cars.indexOf(targetCar), 1);
+                    }
+                });
             }
         },
     }
