@@ -3,10 +3,9 @@
     <section id="intro">
       <div class="overVideo">
       </div>
-      <video autoplay muted loop id="carsVideo">
 
-        Your browser does not support HTML5 video.
-      </video>
+
+
     </section>
 
     <section id="results" class="pt-5">

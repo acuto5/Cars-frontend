@@ -5,13 +5,13 @@
         </td>
 
         <td>{{car._id}}</td>
-        <td>{{car.brand}}</td>
+        <td>{{car.brand | capitalize }}</td>
         <td>{{car.model}}</td>
 
-        <td>{{car.engine}}</td>
-        <td>{{car.price}}</td>
+        <td>{{car.engine | twoNums(1)}}</td>
+        <td>{{car.price | twoNums}}</td>
 
-        <td></td>
+        <td><button class="btn btn-danger" @click="removeCar()"><font-awesome-icon icon="trash" /></button></td>
     </tr>
 </template>
 
@@ -19,5 +19,18 @@
     export default {
         props:['car'],
         name: 'car',
+        filters: {
+            capitalize: function (value) {
+                return value.toUpperCase()
+            },
+            twoNums: function (val, num = 2) {
+                return val.toFixed(num);
+            }
+        },
+        methods: {
+            removeCar(){
+                console.log(this.car._id);
+            }
+        },
     }
 </script>
